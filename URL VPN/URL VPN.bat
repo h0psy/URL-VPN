@@ -13,7 +13,8 @@ echo 7. ALT3 a2a09b
 echo 8. ALT3 real240
 echo 9. ALT3 HKLM
 echo 10. ALT3 a2a190b
-echo 11. exit
+echo _____________________
+echo 0. exit
 echo.
 set /p var=Set Option:
 if %var%==1 goto start VPN
@@ -26,7 +27,7 @@ if %var%==7 goto ALT3 a2a09b
 if %var%==8 goto ALT3 real240
 if %var%==9 goto ALT3 HKLM
 if %var%==10 goto ALT3 a2a190b
-if %var%==11 goto exit
+if %var%==0 goto exit
 :start VPN
 cls
 echo[System.File]
