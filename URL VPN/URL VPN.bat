@@ -3,17 +3,20 @@
 title URL VPN
 echo Welcome to URL VPN
 echo.
+echo version 1.0.3
 echo 1. auto setting VPN
 echo 2. stop
 echo 3. protocol proxy set exec
 echo 4. classic proxy
+echo _______________________________________________________________
 echo 5. check keystartColorVarianceAlpha
 echo 6. check vps connections tls_clienthello_www_google_com
+echo _______________________________________________________________
 echo 7. ALT3 a2a09b
 echo 8. ALT3 real240
 echo 9. ALT3 HKLM
 echo 10. ALT3 a2a190b
-echo _____________________
+echo _______________________________________________________________
 echo 0. exit
 echo.
 set /p var=Set Option:
