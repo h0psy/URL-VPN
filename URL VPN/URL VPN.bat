@@ -3,7 +3,7 @@
 title URL VPN
 echo Welcome to URL VPN
 echo.
-echo 1. start VPN
+echo 1. auto setting VPN
 echo 2. stop
 echo 3. protocol proxy set exec
 echo 4. classic proxy
