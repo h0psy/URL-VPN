@@ -5,17 +5,8 @@ echo Welcome to URL VPN
 echo.
 echo version 1.0.6
 echo _______________________________________________________________
-echo 1. settings
-echo.
-set /p var=Set Option:
-@echo off
-:settings VPN
-cls
-echo.
-echo _______________________________________________________________
 echo 1. auto VPN setup
 echo 2. stop
-echo _______________________________________________________________
 echo 3. protocol proxy set exec
 echo 4. classic proxy
 echo _______________________________________________________________
@@ -48,12 +39,11 @@ echo _______________________________________________________________
 echo 28. bypassing the block .com 1
 echo 29. bypassing the block .com 2
 echo _______________________________________________________________
-echo 30. settings
+echo 30. VPN URL requirement
 echo _______________________________________________________________
 echo 0. exit
 echo.
 set /p var=Set Option:
-if %var%==settings goto settings
 if %var%==1 goto start VPN
 if %var%==2 goto stop
 if %var%==3 goto protocol proxy set exec
@@ -83,7 +73,7 @@ if %var%==26 goto ALT4 EXP 8
 if %var%==27 goto ALT4 EXP 9
 if %var%==28 goto bypassing the block .com 1
 if %var%==29 goto bypassing the block .com 2
-if %var%==30 goto settings
+if %var%==30 goto VPN URL requirement
 if %var%==0 goto exit
 :start VPN
 cls
@@ -1255,6 +1245,11 @@ cd /d %BIN%
 --filter-udp=%GameFilterUDP% --ipset="%LISTS%ipset-all.txt" --ipset-exclude="%LISTS%ipset-exclude.txt" --ipset-exclude="%LISTS%ipset-exclude-user.txt" --dpi-desync=fake --dpi-desync-repeats=5 --dpi-desync-any-protocol=1 --dpi-desync-fake-unknown-udp="%BIN%quic_initial_4pda.to.bin" --dpi-desync-fake-unknown-udp="%BIN%ACTIVE_GAME_UDP.bin" --dpi-desync-cutoff=n4
 pause
 exit
+:VPN URL requirement
+cls
+echo Windows 11 is required.A security module (version 1.2 2.0) is required.A LAN cable is required for a direct internet connection to the computer.
+pause
+exit
 :ALT4 EXP 1
 cls
 echo chcp 65001 > nul
@@ -1489,46 +1484,8 @@ cd /d %BIN%
 --filter-udp=%GameFilterUDP% --ipset="%LISTS%ipset-all.txt" --ipset-exclude="%LISTS%ipset-exclude.txt" --ipset-exclude="%LISTS%ipset-exclude-user.txt" --dpi-desync=fake --dpi-desync-repeats=10 --dpi-desync-any-protocol=1 --dpi-desync-fake-unknown-udp="%BIN%ACTIVE_GAME_UDP.bin" --dpi-desync-cutoff=n2
 pause
 exit
-
-echo.
-set /p var=set option:
-@echo off
-:settings
-cls
-echo.
-echo 1 off auto updated VPN
-echo 2 on auto updated VPN
-echo _______________________________________________________________
-echo 3 check for updates
-echo 4 VPN URL requirement
-echo.
-set /p var=set option:
-if %var%==1 goto 1 
-if %var%==2 goto 2
-if %var%==3 goto 3 check for updates
-if %var%==4 goto 4 VPN URL requirement
-:1 off auto updated VPN
-cls
-echo auto updated VPN off
-pause
-exit
-:2 on auto updated VPN
-cls
-echo auto updated VPN on
-pause
-exit
-:3 check for updates
-cls
-echo https://github.com/h0psy/URL-VPN/blob/main/README.md
-pause
-exit
-:4 VPN URL requirement
-cls
-echo Windows 11 is required.A security module (version 1.2 2.0) is required.A LAN cable is required for a direct internet connection to the computer.
-pause
-exit
 :exit
 cls
 echo Prees ENTER to exit
 pause
-exit 
+exit
