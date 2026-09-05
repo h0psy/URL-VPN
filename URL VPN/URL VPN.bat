@@ -6,6 +6,16 @@ echo.
 echo version 1.0.6
 echo _______________________________________________________________
 echo 1. settings
+echo Version 1.0.6! Date:9.5.2026. 
+echo 1. Interface improvements. 
+echo 2. Completely reworked VPN URL code. 
+echo 3. Added settings for VPN URLs. 
+echo 4. Complete overhaul of functions. 
+echo 5. New functions. 
+echo 6. Reworked proxy servers. 
+echo 7. Reworked ALT3-ALT4 servers. 
+echo 8. Reworked cfg.lava, pak01.java, pak02.java, and server connection. 
+echo 9. Added new protection against TSPU servers.
 echo.
 set /p var=Set Option:
 @echo off
