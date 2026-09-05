@@ -3,31 +3,24 @@
 title URL VPN
 echo Welcome to URL VPN
 echo.
-echo version 1.0.6
+echo version 1.0.7
 echo _______________________________________________________________
 echo 1. settings
-echo Version 1.0.6! Date:9.5.2026. 
-echo 1. Interface improvements. 
-echo 2. Completely reworked VPN URL code. 
-echo 3. Added settings for VPN URLs. 
-echo 4. Complete overhaul of functions. 
-echo 5. New functions. 
-echo 6. Reworked proxy servers. 
-echo 7. Reworked ALT3-ALT4 servers. 
-echo 8. Reworked cfg.lava, pak01.java, pak02.java, and server connection. 
-echo 9. Added new protection against TSPU servers.
-echo.
+echo Version 1.0.7! Date:9.5.2026 Bug fixes
+echo 1. Fixed "31 Tweaks"; it now works correctly.
+echo 2. Added GamerMode (Thanks to HuX1k for the idea; HuX1k is now an AppStudio member).
+echo 3. Added DeviceStreaming.
 set /p var=Set Option:
 @echo off
 :settings VPN
 cls
 echo.
 echo _______________________________________________________________
-echo 1. auto VPN setup
+echo 1. auto vpn setup
 echo 2. stop
 echo _______________________________________________________________
-echo 3. protocol proxy set exec
-echo 4. classic proxy
+echo 3. protocol proxy set.exec
+echo 4. classic proxy.exe
 echo _______________________________________________________________
 echo 5. check keyproxy
 echo 6. check vps connections tls_clienthello_www_google_com
@@ -59,6 +52,9 @@ echo 28. bypassing the block .com 1
 echo 29. bypassing the block .com 2
 echo _______________________________________________________________
 echo 30. settings
+echo 31. tweeks
+echo 32. GamerMode
+echo 33. DeviceStreaming
 echo _______________________________________________________________
 echo 0. exit
 echo.
@@ -66,8 +62,8 @@ set /p var=Set Option:
 if %var%==settings goto settings
 if %var%==1 goto start VPN
 if %var%==2 goto stop
-if %var%==3 goto protocol proxy set exec
-if %var%==4 goto classic proxy
+if %var%==3 goto protocol proxy set.exec
+if %var%==4 goto classic proxy.exe
 if %var%==5 goto check keyproxy
 if %var%==6 goto check vps connections tls_clienthello_www_google_com
 if %var%==7 goto server reboot
@@ -94,6 +90,9 @@ if %var%==27 goto ALT4 EXP 9
 if %var%==28 goto bypassing the block .com 1
 if %var%==29 goto bypassing the block .com 2
 if %var%==30 goto settings
+if %var%==31 goto tweeks
+if %var%==32 goto GamerMode
+if %var%==33 goto DeviceStreaming
 if %var%==0 goto exit
 :start VPN
 cls
@@ -469,7 +468,7 @@ cls
 echo vpn is off CODE(--filter-udp=19294-19344,50000-50100 --filter-l7=discord,stun --dpi-desync=fake --dpi-desync-fake-discord="%BIN%ACTIVE_DISCORD_UDP.bin" --dpi-desync-fake-stun="%BIN%ACTIVE_DISCORD_UDP.bin" --dpi-desync-repeats=6 --stop ^)
 pause
 exit
-:protocol proxy set exec 
+:protocol proxy set.exec 
 cls
 echo exclude %~n0" /min "%BIN%winws.exe" --wf-tcp=80,443,2053,2083,2087,2096,8443,%GameFilterTCP% --wf-udp=443,19294-19344,50000-50100,%GameFilterUDP% ^
 --filter-udp=443 --hostlist="%LISTS%list-general.txt" --hostlist="%LISTS%list-general-user.txt" --hostlist-exclude="%LISTS%list-exclude.txt" --hostlist-exclude="%LISTS%list-exclude-user.txt" --ipset-exclude="%LISTS%ipset-exclude.txt" --ipset-exclude="%LISTS%ipset-exclude-user.txt" --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic="%BIN%quic_initial_www_google_com.bin" --new ^
@@ -483,7 +482,7 @@ echo exclude %~n0" /min "%BIN%winws.exe" --wf-tcp=80,443,2053,2083,2087,2096,844
 --filter-udp=%GameFilterUDP% --ipset="%LISTS%ipset-all.txt" --ipset-exclude="%LISTS%ipset-exclude.txt" --ipset-exclude="%LISTS%ipset-exclude-user.txt" --dpi-desync=fake --dpi-desync-repeats=12 --dpi-desync-any-protocol=1 --dpi-desync-fake-unknown-udp="%BIN%ACTIVE_GAME_UDP.bin" --dpi-desync-cutoff=n3
 pause
 exit
-:classic proxy
+:classic proxy.exe
 cls
 echo[System.File]
 "%SystemRoot%\inf\nfssvr\$ [dsctrs.ini]"
@@ -1542,3 +1541,650 @@ cls
 echo Prees ENTER to exit
 pause
 exit 
+:tweeks
+cls
+echo.
+echo 1. Change_MyProfile
+echo 2. PowerShellTweaksUrlVpn
+echo 3. RegistryTweaksUrlVpn
+echo 4. StopDU UrlVpn
+echo 5. off task menager URL VPN
+echo.
+set /p var=set option:
+if %var%==1 goto 1 Change_MyProfile
+if %var%==2 goto 2 PowerShellTweaksUrlVpn
+if %var%==3 goto 3 RegistryTweaksUrlVpn
+if %var%==4 goto 4 StopDU UrlVpn
+if %var%==5 goto 5 off task menager URL VPN
+:1 Change_MyProfile
+cls
+echo # https://github.com/RonildoSouza/ResizeImageModulePS
+
+function Resize-Image {
+    <#
+    .SYNOPSIS
+        Resize-Image resizes an image file.
+
+    .DESCRIPTION
+        This function uses the native .NET API to resize an image file and save it to a file.
+        It supports the following image formats: BMP, GIF, JPEG, PNG, TIFF
+
+    .PARAMETER InputFile
+        Type [string]
+        The parameter InputFile is used to define the value of image name or path to resize.
+
+    .PARAMETER OutputFile
+        Type [string]
+        The parameter OutputFile is used to define the value of output image resize.
+
+    .PARAMETER Width
+        Type [int32]
+        The parameter Width is used to define the value of new width to image.
+
+    .PARAMETER Height
+        Type [int32]
+        The parameter Height is used to define the value of new height to image.
+
+    .PARAMETER ProportionalResize
+        Type [bool]
+        The optional parameter ProportionalResize is used to define if execute proportional resize.
+
+    .EXAMPLE
+        Resize-Image -InputFile "C:/image.png" -OutputFile "C:/image2.png" -Width 300 -Height 300
+
+    .NOTES
+        Author: Ronildo Souza
+        Last Edit: 2018-10-09
+        Version 1.0.0 - initial release
+        Version 1.0.1 - add proportional resize
+    #>
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$InputFile,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$OutputFile,
+        [Parameter(Mandatory = $true)]
+        [int32]$Width,
+        [Parameter(Mandatory = $true)]
+        [int32]$Height,
+        [Parameter(Mandatory = $false)]
+        [bool]$ProportionalResize = $true)
+
+    # Add assemblies
+    Add-Type -AssemblyName System
+    Add-Type -AssemblyName System.Drawing
+
+    $image = [System.Drawing.Image]::FromFile((Get-Item $InputFile))
+
+    $ratioX = $Width / $image.Width;
+    $ratioY = $Height / $image.Height;
+    $ratio = [System.Math]::Min($ratioX, $ratioY);
+
+    [int32]$newWidth = If ($ProportionalResize) { $image.Width * $ratio } Else { $Width }
+    [int32]$newHeight = If ($ProportionalResize) { $image.Height * $ratio } Else { $Height }
+
+    $destImage = New-Object System.Drawing.Bitmap($newWidth, $newHeight)
+
+    # Draw new image on the empty canvas
+    $graphics = [System.Drawing.Graphics]::FromImage($destImage)
+    $graphics.DrawImage($image, 0, 0, $newWidth, $newHeight)
+    $graphics.Dispose()
+
+    # Save the image
+    $destImage.Save($OutputFile)
+}
+
+$PNG = "$env:SYSTEMROOT\Setup\profile.png"
+
+$PrimaryUser = @(foreach ($User in (Get-WmiObject Win32_UserAccount)) {
+    [PSCustomObject]@{
+        SortKey = [int]($User.SID -split '-')[-1]
+        SID = $User.SID
+        Name = $User.Name
+    }
+}) | Where-Object { $_.SortKey -ge 1000 } | Sort-Object SortKey | select -First 1
+
+$UserName = $PrimaryUser.Name
+$SID = $PrimaryUser.SID
+
+$UserPublic_Folder = "C:\Users\Public\AccountPictures\$UserName"
+$null = New-Item -Path $UserPublic_Folder -ItemType Directory -Force
+
+$reg_AccountPicture = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users'
+$null = New-Item -Path $reg_AccountPicture -Name $SID -Force
+
+foreach ($Size in @(32, 40, 48, 64, 96, 192, 208, 240)) {
+    $File = "$UserPublic_Folder\${Size}x${Size}.png"
+    Resize-Image -InputFile $PNG -OutputFile $File -Width $Size -Height $Size
+    $null = New-ItemProperty -Path "$reg_AccountPicture\$SID" -Name "Image$Size" -Value $File -Force
+}
+
+$ProgramData_Folder = 'C:\ProgramData\Microsoft\User Account Pictures'
+Copy-Item $PNG "$ProgramData_Folder\user.png" -Force
+
+foreach ($Size in @(32, 40, 48, 192)) {
+    Copy-Item "$UserPublic_Folder\${Size}x${Size}.png" "$ProgramData_Folder\user-${Size}.png" -Force
+}
+pause
+exit
+:2 PowerShellTweaksUrlVpn
+cls
+echo bcdedit /set disabledynamictick yes
+
+powercfg.exe /hibernate off
+
+
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\CloudStore /v DisableRoamingSync /t REG_DWORD /d 1 /f
+
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\AppManagement\AppSettings /v ArchiveAppsEnabled /t REG_DWORD /d 0 /f
+
+reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c} /f
+
+reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_41040327\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c} /f
+
+reg delete HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_36354489\{f874310e-b6b7-47dc-bc84-b9e6b38f5903} /f
+
+reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR /f /t REG_DWORD /v "AppCaptureEnabled" /d 0
+
+reg add HKEY_CURRENT_USER\System\GameConfigStore /f /t REG_DWORD /v "GameDVR_Enabled" /d 0
+
+
+
+
+
+
+
+
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "EnergyEstimationEnabled" /t REG_DWORD /d "0" /f >nul 2>&1
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "HideRecommendedSection" /t REG_DWORD /d 1 /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d 2 /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "IOMMUFlags" /t REG_DWORD /d 0 /f >nul 2>&1
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "HistoryViewEnabled" /t REG_DWORD /d 0 /f >nul 2>&1
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "DeviceHistoryEnabled" /t REG_DWORD /d 0 /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d 1 /f >nul 2>&1
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance" /v "MaintenanceDisabled" /t REG_DWORD /d 1 /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d 0 /f >nul 2>&1
+reg add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t REG_DWORD /d 0 /f >nul 2>&1
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d 0 /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d 4 /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d 4 /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\USB" /v DisableSelectiveSuspend /t REG_DWORD /d 1 /f >nul 2>&1
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Latency Sensitive" /t REG_SZ /d True /f >nul 2>&1
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\AFD\Parameters" /v "FastSendDatagramThreshold" /t REG_DWORD /d 64000 /f >nul 2>&1
+
+
+
+Set-ItemProperty -LiteralPath 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Type 'DWord' -Value 3 -Force;		
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ControlAnimations" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\AnimateMinMax" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimations" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMAeroPeekEnabled" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\SelectionFade" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMSaveThumbnailEnabled" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\CursorShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ThumbnailsOrIcon" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewAlphaSelect" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DragFullWindows" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ComboBoxAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\FontSmoothing" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListBoxSmoothScrolling" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DropShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+
+
+
+
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage" /v ProgramsCache /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartPage2" /v ProgramsCache /f
+
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /f /va
+
+
+
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
+reg delete "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
+pause
+exit
+:RegistryTweaksUrlVpn
+cls
+echo Windows Registry Editor Version 5.00
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
+"FeatureSettingsOverride"=dword:00000001
+"FeatureSettingsOverrideMask"=dword:00000001
+
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+"HideRecommendedSection"=dword:00000001
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_TrackProgs"=dword:00000000
+
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings]
+"PausedFeatureStatus"=dword:00000000
+"PausedQualityStatus"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings]
+"FlightSettingsMaxPauseDays"=dword:00000e42
+"PauseFeatureUpdatesStartTime"="2023-11-06T14:03:37Z"
+"PauseFeatureUpdatesEndTime"="2033-10-31T14:03:37Z"
+"PauseQualityUpdatesStartTime"="2023-11-06T14:03:37Z"
+"PauseQualityUpdatesEndTime"="2033-10-31T14:03:37Z"
+"PauseUpdatesStartTime"="2023-11-06T14:03:37Z"
+"PauseUpdatesExpiryTime"="2033-10-31T14:03:37Z"
+
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config]
+"VulnerableDriverBlocklistEnable"=dword:00000000
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"NoStartMenuMFUprogramsList"=dword:00000001
+"NoInstrumentation"=dword:00000001
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USB]
+“DisableSelectiveSuspend”=dword:00000001
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
+"TurnOffWindowsCopilot"=dword:00000001
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Power]
+"HibernateEnabled"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+"AppsUseLightTheme"=dword:00000000
+"SystemUsesLightTheme"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent]
+"StartColorMenu"=dword:00000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling]
+"PowerThrottlingOff"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
+"WaitToKillServiceTimeout"="2000"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
+"SystemResponsiveness"=dword:0000000a
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"DisableEdgeDesktopShortcutCreation"=dword:00000001
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\PriorityControl]
+"Win32PrioritySeparation"=dword:00000028
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\GameBar]
+"AutoGameModeEnabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
+"fAllowToGetHelp"=dword:00000000
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Wifi\AllowAutoConnectToWiFiSenseHotspots]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Wifi\AllowWiFiHotSpotReporting]
+"Value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000]
+"RMHdcpKeyglobZero"=dword:00000001
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+"AllowTelemetry"=dword:00000000
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsMitigation]
+"UserPreference"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\StorageSense]
+"AllowStorageSenseGlobal"=dword:00000000
+
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy]
+"LetAppsGetDiagnosticInfo"=dword:00000002
+
+
+
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\PowerPlan]
+"MUIVerb"="Custom Power Plans"
+"Icon"="powercpl.dll"
+"Position"="Middle"
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\PowerPlan\command]
+@="control.exe powercfg.cpl"
+
+
+
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\USB\AutomaticSurpriseRemoval]
+"AttemptRecoveryFromUsbPowerDrain"=dword:00000000
+
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings]
+"IsContinuousInnovationOptedIn"=dword:00000000
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance]
+"MaintenanceDisabled"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+"UploadUserActivities"=dword:00000000
+
+
+[HKEY_CLASSES_ROOT\Drive\shell\Optimize]
+"Icon"="dfrgui.exe"
+"HasLUAShield"=""
+"Extended"=-
+"SubCommands"=""
+
+
+[HKEY_CLASSES_ROOT\Drive\Shell\Optimize\shell\001menu]
+"MUIVerb"="Analyze Drive"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\Drive\Shell\Optimize\shell\001menu\command]
+@="PowerShell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/k, defrag %1 /A' -Verb runAs\""
+
+
+[HKEY_CLASSES_ROOT\Drive\Shell\Optimize\shell\002menu]
+"MUIVerb"="Optimize Drive"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\Drive\Shell\Optimize\shell\002menu\command]
+@="PowerShell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/k, defrag %1 /O /H' -Verb runAs\""
+
+
+[HKEY_CLASSES_ROOT\Drive\Shell\Optimize\shell\003menu]
+"MUIVerb"="Optimize All Drives"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\Drive\Shell\Optimize\shell\003menu\command]
+@="PowerShell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/k, defrag /C /O /H' -Verb runAs\""
+
+
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}]
+@=""
+
+
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}]
+@="CLSID_MSGraphHomeFolder"
+"System.IsPinnedToNameSpaceTree"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}]
+"System.IsPinnedToNameSpaceTree"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
+@=""
+
+
+[HKEY_CURRENT_USER\Control Panel\International\User Profile]
+"HttpAcceptLanguageOptOut"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_TrackProgs"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"SubscribedContent-338393Enabled"=dword:00000000
+"SubscribedContent-353694Enabled"=dword:00000000
+"SubscribedContent-353696Enabled"=dword:00000000
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\InkingAndTypingPersonalization]
+"Value"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization]
+"RestrictImplicitInkCollection"=dword:00000001
+"RestrictImplicitTextCollection"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization\TrainedDataStore]
+"HarvestContacts"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+"PublishUserActivities"=dword:00000000
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Network Connections]
+"NC_ShowSharedAccessUI"=dword:00000000
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CDP]
+"CdpSessionUserAuthzPolicy"=dword:00000000
+"RomeSdkChannelUserAuthzPolicy"=dword:00000000
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+"SimplifyQuickSettings"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Stickers]
+"EnableStickers"=-
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Siuf\Rules]
+"NumberOfSIUFInPeriod"=dword:00000000
+"PeriodInNanoSeconds"=-
+
+[HKEY_CURRENT_USER\Software\Microsoft\Input\Settings]
+"InsightsEnabled"=dword:00000000
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
+"ActivityHistoryEnabled"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SystemSettings\AccountNotifications]
+"EnableAccountNotifications"=dword:00000000
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_TrackDocs"=dword:00000000
+
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy]
+"01"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications]
+"GlobalUserDisabled"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CloudContent]
+"DisableWindowsConsumerFeatures"=dword:00000001
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"MenuShowDelay"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
+"ScoobeSystemSettingEnabled"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}]
+@=""
+
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
+@=""
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications]
+"GlobalUserDisabled"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
+"BackgroundAppGlobalToggle"=dword:00000000
+
+[HKEY_CURRENT_USER\Control Panel\UnsupportedHardwareNotificationCache]
+"SV1"=-
+"SV2"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer]
+"HideRecommendedPersonalizedSites"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\TabletTip\1.7]
+"EnableAutocorrection"=dword:00000000
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"JPEGImportQuality"=dword:00000064
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
+"Enabled"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings]
+"IsDynamicSearchBoxEnabled"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_IrisRecommendations"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_AccountNotifications"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\GameBar]
+"UseNexusForGameBarEnabled"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\TabletTip\1.7]
+"EnableSpellchecking"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell]
+"TabletMode"=dword:00000000
+"SignInMode"=dword:00000001
+
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location]
+"ShowGlobalPrompts"=dword:00000000
+
+
+
+
+
+
+
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode]
+"icon"="bootux.dll,-1032"
+"MUIVerb"="Safe Mode"
+"Position"=-
+"SubCommands"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode\Shell\001-NormalMode]
+@="Restart in Normal Mode"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode\Shell\001-NormalMode\command]
+@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/c,bcdedit /deletevalue {current} safeboot & bcdedit /deletevalue {current} safebootalternateshell & shutdown -r -t 00 -f' -Verb runAs\""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode\Shell\002-SafeMode]
+@="Restart in Safe Mode"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode\Shell\002-SafeMode\command]
+@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/c,bcdedit /set {current} safeboot minimal & bcdedit /deletevalue {current} safebootalternateshell & shutdown -r -t 00 -f' -Verb runAs\""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode\Shell\003-SafeModeNetworking]
+@="Restart in Safe Mode with Networking"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode\Shell\003-SafeModeNetworking\command]
+@="powershell -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/c,bcdedit /set {current} safeboot network & bcdedit /deletevalue {current} safebootalternateshell & shutdown -r -t 00 -f' -Verb runAs\""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode\Shell\004-SafeModeCommandPrompt]
+@="Restart in Safe Mode with Command Prompt"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\SafeMode\Shell\004-SafeModeCommandPrompt\command]
+@="powershell -win
+
+
+
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
+"SvcHostSplitThresholdInKB"=dword:ffffffff
+pause
+exit
+:StopDU UrlVpn
+cls
+echo Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
+"ExcludeWUDriversInQualityUpdate"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching]
+"SearchOrderConfig"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState]
+"ExcludeWUDrivers"=dword:00000001
+
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU]
+"NoAutoUpdate"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Device Metadata]
+"PreventDeviceMetadataFromNetwork"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DriverSearching]
+"SearchOrderConfig"=dword:00000000
+pause
+exit
+:off task menager URL VPN
+cls
+echo 	
+ARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ComboBoxAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemPropSet-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ControlAnimations" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\AnimateMinMax" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimations" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMAeroPeekEnabled" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\SelectionFade" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMSaveThumbnailEnabled" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\CursorShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ThumbnailsOrIcon" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewAlphaSelect" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DragFullWindows" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWerty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\FontSmoothing" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListBoxSmoothScrolling" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DropShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+pause
+exit
+:GamerMode
+cls
+start gamermode.bat
+:DeviceStreaming
+cls
+start DeviceStreaming.bat
