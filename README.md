@@ -25,3 +25,8 @@ version 1.0.6! data 9.5.2026
 7. переработаны ALT3-ALT4 servers
 8. были переработаны cfg.lava,pak01.java,pak02.java и server connection
 9. была добавлена новая защита от ТСПУ серверов
+
+version 1.0.7! data 9.5.2026 bug Fix
+1. исправлен "31 tweeks" теперь он работает исправн.
+2. был создан GamerMode (Спасибо HuX1k за идею,теперь HuX1k Учасник AppStudio)
+3. был создан DeviceStreaming.
